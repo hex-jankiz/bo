@@ -264,7 +264,6 @@ body {
   box-shadow: 0 3px 10px rgba(254, 44, 85, 0.6);
 }
 
-/* ========== تحسين وضوح العنوان ========== */
 .cover-title {
   font-family: 'Cairo', sans-serif;
   font-size: 42px;
@@ -273,7 +272,6 @@ body {
   text-align: center;
   line-height: 1.4;
   margin: 15px 0;
-  /* ظلال متعددة لوضوح أكبر */
   text-shadow: 
     0 0 10px rgba(0,0,0,0.9),
     0 0 20px rgba(0,0,0,0.8),
@@ -283,10 +281,8 @@ body {
     -2px -2px 4px rgba(0,0,0,0.8),
     2px -2px 4px rgba(0,0,0,0.8),
     -2px 2px 4px rgba(0,0,0,0.8);
-  /* حدود خارجية للنص */
   -webkit-text-stroke: 1px rgba(0,0,0,0.6);
   text-stroke: 1px rgba(0,0,0,0.6);
-  /* خلفية شبه شفافة خلف النص */
   display: inline-block;
   padding: 10px 20px;
   background: rgba(0,0,0,0.3);
@@ -305,7 +301,6 @@ body {
   border-radius: 30px;
   margin: 15px 0 25px;
   border: 2px solid rgba(255, 255, 255, 0.4);
-  /* ظلال للنص */
   text-shadow: 
     0 0 10px rgba(0,0,0,0.9),
     0 0 20px rgba(0,0,0,0.8),
@@ -483,9 +478,25 @@ body {
   transform: translateX(-5px);
 }
 
-.toc-modal-item-number { font-weight: 700; color: var(--accent-gold); margin-left: 12px; min-width: 28px; }
-.toc-modal-item-title { flex: 1; font-size: 16px; color: var(--text-primary); }
-.toc-modal-item-page { color: var(--text-secondary); font-size: 13px; }
+/* الرقم على اليمين */
+.toc-modal-item-number {
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-right: 12px;  /* يجعله على اليمين */
+  min-width: 28px;
+  text-align: center;
+  order: 1; /* لضمان ظهوره بعد العنوان */
+}
+.toc-modal-item-title {
+  flex: 1;
+  font-size: 16px;
+  color: var(--text-primary);
+  order: 0; /* العنوان أولاً */
+}
+/* إخفاء أرقام الصفحات القديمة */
+.toc-modal-item-page {
+  display: none;
+}
 
 .book-reader { display: none; min-height: 100vh; padding: 20px; }
 .book-reader.active { display: block; }
@@ -574,7 +585,14 @@ body {
 
 .highlight-box-title { font-family: 'Cairo', sans-serif; font-size: 16px; color: var(--accent-brown); font-weight: 700; margin-bottom: 12px; }
 
-.page-number { text-align: center; margin-top: 35px; font-size: 13px; color: var(--text-secondary); }
+/* رقم الصفحة على اليمين */
+.page-number {
+  text-align: right;
+  margin-top: 35px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding-left: 20px;
+}
 
 .click-zone { position: absolute; top: 0; bottom: 0; width: 70px; z-index: 50; cursor: pointer; }
 .click-zone.prev { right: 0; }
@@ -684,16 +702,16 @@ body {
       <button class="toc-close-btn" id="tocCloseBtn"></button>
     </div>
     <ul class="toc-modal-list">
-      <li class="toc-modal-item" onclick="selectChapter(1)"><span class="toc-modal-item-number"></span><span class="toc-modal-item-title">المقدمة</span><span class="toc-modal-item-page">3</span></li>
-      <li class="toc-modal-item" onclick="selectChapter(2)"><span class="toc-modal-item-number">2</span><span class="toc-modal-item-title">من هو صانع المحتوى الحقيقي؟</span><span class="toc-modal-item-page">5</span></li>
-      <li class="toc-modal-item" onclick="selectChapter(3)"><span class="toc-modal-item-number">3</span><span class="toc-modal-item-title">الستريمر المحترف</span><span class="toc-modal-item-page">9</span></li>
-      <li class="toc-modal-item" onclick="selectChapter(4)"><span class="toc-modal-item-number">4</span><span class="toc-modal-item-title">أخلاقيات صناعة المحتوى</span><span class="toc-modal-item-page">13</span></li>
-      <li class="toc-modal-item" onclick="selectChapter(5)"><span class="toc-modal-item-number">5</span><span class="toc-modal-item-title">لماذا يفشل الكثير من صناع المحتوى؟</span><span class="toc-modal-item-page">17</span></li>
-      <li class="toc-modal-item" onclick="selectChapter(6)"><span class="toc-modal-item-number">6</span><span class="toc-modal-item-title">طريق النجاح</span><span class="toc-modal-item-page">21</span></li>
-      <li class="toc-modal-item" onclick="selectChapter(7)"><span class="toc-modal-item-number">7</span><span class="toc-modal-item-title">التأثير في المجتمع</span><span class="toc-modal-item-page">25</span></li>
-      <li class="toc-modal-item" onclick="selectChapter(8)"><span class="toc-modal-item-number">8</span><span class="toc-modal-item-title">صفات صانع المحتوى المحترم</span><span class="toc-modal-item-page">29</span></li>
-      <li class="toc-modal-item" onclick="selectChapter(9)"><span class="toc-modal-item-number">9</span><span class="toc-modal-item-title">رسالة إلى كل من يريد دخول هذا المجال</span><span class="toc-modal-item-page">33</span></li>
-      <li class="toc-modal-item" onclick="selectChapter(10)"><span class="toc-modal-item-number">10</span><span class="toc-modal-item-title">الخاتمة</span><span class="toc-modal-item-page">37</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(1)"><span class="toc-modal-item-title">المقدمة</span><span class="toc-modal-item-number">١</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(2)"><span class="toc-modal-item-title">من هو صانع المحتوى الحقيقي؟</span><span class="toc-modal-item-number">٢</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(3)"><span class="toc-modal-item-title">الستريمر المحترف</span><span class="toc-modal-item-number">٣</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(4)"><span class="toc-modal-item-title">أخلاقيات صناعة المحتوى</span><span class="toc-modal-item-number">٤</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(5)"><span class="toc-modal-item-title">لماذا يفشل الكثير من صناع المحتوى؟</span><span class="toc-modal-item-number">٥</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(6)"><span class="toc-modal-item-title">طريق النجاح</span><span class="toc-modal-item-number">٦</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(7)"><span class="toc-modal-item-title">التأثير في المجتمع</span><span class="toc-modal-item-number">٧</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(8)"><span class="toc-modal-item-title">صفات صانع المحتوى المحترم</span><span class="toc-modal-item-number">٨</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(9)"><span class="toc-modal-item-title">رسالة إلى كل من يريد دخول هذا المجال</span><span class="toc-modal-item-number">٩</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(10)"><span class="toc-modal-item-title">الخاتمة</span><span class="toc-modal-item-number">١٠</span></li>
     </ul>
   </div>
 </div>
@@ -711,24 +729,26 @@ body {
     </div>
     
     <div class="pages-area">
+      <!-- صفحة الفهرس الداخلية (بدون رقم صفحة) -->
       <div class="page toc-page active" data-page="0">
         <div class="chapter-header"><h2 class="chapter-title" style="font-size: 32px;">فهرس الكتاب</h2></div>
         <ul class="toc-modal-list">
-          <li class="toc-modal-item" onclick="goToPage(1)"><span class="toc-modal-item-number">1</span><span class="toc-modal-item-title">المقدمة</span><span class="toc-modal-item-page">3</span></li>
-          <li class="toc-modal-item" onclick="goToPage(2)"><span class="toc-modal-item-number">2</span><span class="toc-modal-item-title">من هو صانع المحتوى الحقيقي؟</span><span class="toc-modal-item-page">5</span></li>
-          <li class="toc-modal-item" onclick="goToPage(3)"><span class="toc-modal-item-number">3</span><span class="toc-modal-item-title">الستريمر المحترف</span><span class="toc-modal-item-page">9</span></li>
-          <li class="toc-modal-item" onclick="goToPage(4)"><span class="toc-modal-item-number">4</span><span class="toc-modal-item-title">أخلاقيات صناعة المحتوى</span><span class="toc-modal-item-page">13</span></li>
-          <li class="toc-modal-item" onclick="goToPage(5)"><span class="toc-modal-item-number">5</span><span class="toc-modal-item-title">لماذا يفشل الكثير من صناع المحتوى؟</span><span class="toc-modal-item-page">17</span></li>
-          <li class="toc-modal-item" onclick="goToPage(6)"><span class="toc-modal-item-number">6</span><span class="toc-modal-item-title">طريق النجاح</span><span class="toc-modal-item-page">21</span></li>
-          <li class="toc-modal-item" onclick="goToPage(7)"><span class="toc-modal-item-number">7</span><span class="toc-modal-item-title">التأثير في المجتمع</span><span class="toc-modal-item-page">25</span></li>
-          <li class="toc-modal-item" onclick="goToPage(8)"><span class="toc-modal-item-number">8</span><span class="toc-modal-item-title">صفات صانع المحتوى المحترم</span><span class="toc-modal-item-page">29</span></li>
-          <li class="toc-modal-item" onclick="goToPage(9)"><span class="toc-modal-item-number">9</span><span class="toc-modal-item-title">رسالة إلى كل من يريد دخول هذا المجال</span><span class="toc-modal-item-page">33</span></li>
-          <li class="toc-modal-item" onclick="goToPage(10)"><span class="toc-modal-item-number">10</span><span class="toc-modal-item-title">الخاتمة</span><span class="toc-modal-item-page">37</span></li>
+          <li class="toc-modal-item" onclick="goToPage(1)"><span class="toc-modal-item-title">المقدمة</span><span class="toc-modal-item-number">١</span></li>
+          <li class="toc-modal-item" onclick="goToPage(2)"><span class="toc-modal-item-title">من هو صانع المحتوى الحقيقي؟</span><span class="toc-modal-item-number">٢</span></li>
+          <li class="toc-modal-item" onclick="goToPage(3)"><span class="toc-modal-item-title">الستريمر المحترف</span><span class="toc-modal-item-number">٣</span></li>
+          <li class="toc-modal-item" onclick="goToPage(4)"><span class="toc-modal-item-title">أخلاقيات صناعة المحتوى</span><span class="toc-modal-item-number">٤</span></li>
+          <li class="toc-modal-item" onclick="goToPage(5)"><span class="toc-modal-item-title">لماذا يفشل الكثير من صناع المحتوى؟</span><span class="toc-modal-item-number">٥</span></li>
+          <li class="toc-modal-item" onclick="goToPage(6)"><span class="toc-modal-item-title">طريق النجاح</span><span class="toc-modal-item-number">٦</span></li>
+          <li class="toc-modal-item" onclick="goToPage(7)"><span class="toc-modal-item-title">التأثير في المجتمع</span><span class="toc-modal-item-number">٧</span></li>
+          <li class="toc-modal-item" onclick="goToPage(8)"><span class="toc-modal-item-title">صفات صانع المحتوى المحترم</span><span class="toc-modal-item-number">٨</span></li>
+          <li class="toc-modal-item" onclick="goToPage(9)"><span class="toc-modal-item-title">رسالة إلى كل من يريد دخول هذا المجال</span><span class="toc-modal-item-number">٩</span></li>
+          <li class="toc-modal-item" onclick="goToPage(10)"><span class="toc-modal-item-title">الخاتمة</span><span class="toc-modal-item-number">١٠</span></li>
         </ul>
       </div>
 
+      <!-- الصفحات الداخلية مرقمة من ١ إلى ١٠ -->
       <div class="page" data-page="1">
-        <div class="chapter-header"><div class="chapter-number">الفصل 1</div><h2 class="chapter-title">المقدمة</h2></div>
+        <div class="chapter-header"><div class="chapter-number">الفصل ١</div><h2 class="chapter-title">المقدمة</h2></div>
         <div class="content">
           <p>أخي القارئ، أختي القارئة، أكتب لك هذه الكلمات من واقع خبرة واسعة في العالم الرقمي والتقني، ومتابعة دقيقة لعالم صناعة المحتوى عن قرب. عالم تغيرت فيه المفاهيم، وانقلبت فيه الموازين، وأصبح فيه كل من يملك هاتفاً ذكياً يظن نفسه صانع محتوى.</p>
           <p>لكن دعني أسألك سؤالاً صادقاً: هل كل من يمسك الكاميرا صار صانع محتوى؟ هل كل من ينشر فيديو صار مؤثراً؟ هل الشهرة وحدها تكفي ليقال عنك إنك ناجح؟</p>
@@ -737,11 +757,11 @@ body {
           <p>هذا الكتاب ليس نقداً لأحد، ولا هجوماً على فئة بعينها، بل هو دعوة صادقة إلى التأمل، ومراجعة للذات، وتذكير بالمسؤولية العظيمة التي يحملها كل من اختار أن يكون صانع محتوى.</p>
           <p>تعال معي في هذه الرحلة، فلعلها تكون نوراً لك كما كانت لي.</p>
         </div>
-        <div class="page-number">3</div>
+        <div class="page-number">١</div>
       </div>
 
       <div class="page" data-page="2">
-        <div class="chapter-header"><div class="chapter-number">الفصل 2</div><h2 class="chapter-title">من هو صانع المحتوى الحقيقي؟</h2></div>
+        <div class="chapter-header"><div class="chapter-number">الفصل ٢</div><h2 class="chapter-title">من هو صانع المحتوى الحقيقي؟</h2></div>
         <div class="content">
           <p>كثيرون اليوم يطلقون على أنفسهم لقب "صانع محتوى" لمجرد أنهم ينشرون فيديوهات أو صوراً على منصات التواصل، ولكن الحقيقة أن صناعة المحتوى أعمق من ذلك بكثير.</p>
           <h2>مفهوم صناعة المحتوى</h2>
@@ -750,11 +770,11 @@ body {
           <p>الناشر قد ينشر أي شيء، في أي وقت، دون تخطيط أو هدف. أما صانع المحتوى فهو من يخطط لما سيقدمه، ويدرس جمهوره، ويختار رسائله بعناية.</p>
           <div class="highlight-box"><div class="highlight-box-title">نقطة مهمة</div><p>امتلاك كاميرا احترافية، أو عدد كبير من المتابعين، لا يجعل منك صانع محتوى حقيقي. فالأدوات وسائل، والرسالة هي الغاية.</p></div>
         </div>
-        <div class="page-number">5</div>
+        <div class="page-number">٢</div>
       </div>
 
       <div class="page" data-page="3">
-        <div class="chapter-header"><div class="chapter-number">الفصل 3</div><h2 class="chapter-title">الستريمر المحترف</h2></div>
+        <div class="chapter-header"><div class="chapter-number">الفصل ٣</div><h2 class="chapter-title">الستريمر المحترف</h2></div>
         <div class="content">
           <p>البث المباشر أصبح من أكثر أشكال صناعة المحتوى انتشاراً. وهو شكل فريد من التفاعل الحي مع الجمهور، يتطلب مهارات خاصة، وانضباطاً عالياً، ووعياً كبيراً بالمسؤولية.</p>
           <h2>كيف يكون الستريمر محترفاً؟</h2>
@@ -766,11 +786,11 @@ body {
           </ul>
           <div class="quote">الستريمر الحقيقي ليس من يُسكت منتقديه بالصراخ، بل من يكسب احترامهم بالحكمة.<span class="quote-author">- جنكيز</span></div>
         </div>
-        <div class="page-number">9</div>
+        <div class="page-number">٣</div>
       </div>
 
       <div class="page" data-page="4">
-        <div class="chapter-header"><div class="chapter-number">الفصل 4</div><h2 class="chapter-title">أخلاقيات صناعة المحتوى</h2></div>
+        <div class="chapter-header"><div class="chapter-number">الفصل ٤</div><h2 class="chapter-title">أخلاقيات صناعة المحتوى</h2></div>
         <div class="content">
           <p>الأخلاق هي الأساس. وبدون أخلاق، كل شيء آخر لا قيمة له.</p>
           <h2>احترام المشاهد والأطفال</h2>
@@ -779,11 +799,11 @@ body {
           <h2>عدم نشر الكراهية</h2>
           <p>الكراهية تجلب مشاهدات سريعة، لكنها تترك أثراً سيئاً. ففكر قبل أن تتكلم: هل هذا الكلام يبني أم يهدم؟</p>
         </div>
-        <div class="page-number">13</div>
+        <div class="page-number">٤</div>
       </div>
 
       <div class="page" data-page="5">
-        <div class="chapter-header"><div class="chapter-number">الفصل 5</div><h2 class="chapter-title">لماذا يفشل الكثير من صناع المحتوى؟</h2></div>
+        <div class="chapter-header"><div class="chapter-number">الفصل ٥</div><h2 class="chapter-title">لماذا يفشل الكثير من صناع المحتوى؟</h2></div>
         <div class="content">
           <h2>التكرار وغياب الإبداع</h2>
           <p>الجمهور ذكي ويبحث عن الجديد. لو أنت تقدم نفس الشيء كل مرة، الناس ستذهب. الإبداع ليس رفاهية، بل ضرورة.</p>
@@ -793,11 +813,11 @@ body {
           <h2>فقدان احترام الجمهور</h2>
           <p>الجمهور ممكن أن يسامحك على غلطة، لكن لا يسامحك على فقدان الاحترام. الأرقام لا تساوي شيئاً بدون احترام.</p>
         </div>
-        <div class="page-number">17</div>
+        <div class="page-number">٥</div>
       </div>
 
       <div class="page" data-page="6">
-        <div class="chapter-header"><div class="chapter-number">الفصل 6</div><h2 class="chapter-title">طريق النجاح</h2></div>
+        <div class="chapter-header"><div class="chapter-number">الفصل ٦</div><h2 class="chapter-title">طريق النجاح</h2></div>
         <div class="content">
           <h2>طور نفسك واقرأ</h2>
           <p>صانع المحتوى هو وعاء. لو كان فارغاً، لا يوجد شيء يقدمه. القراءة توسع عقلك وتعطيك أفكاراً جديدة.</p>
@@ -805,22 +825,22 @@ body {
           <p>النجاح الحقيقي لا يأتي من فيديو واحد، بل من عمل مستمر، والتزام، وانضباط.</p>
           <div class="highlight-box"><div class="highlight-box-title">المعادلة</div><p>النجاح في صناعة المحتوى = قيمة + استمرارية + أخلاق. لو جمعت الثلاثة، ستنجح.</p></div>
         </div>
-        <div class="page-number">21</div>
+        <div class="page-number">٦</div>
       </div>
 
       <div class="page" data-page="7">
-        <div class="chapter-header"><div class="chapter-number">الفصل 7</div><h2 class="chapter-title">التأثير في المجتمع</h2></div>
+        <div class="chapter-header"><div class="chapter-number">الفصل ٧</div><h2 class="chapter-title">التأثير في المجتمع</h2></div>
         <div class="content">
           <p>كل فيديو تعمل، كل بث تقدم، كل كلمة تقول، تؤثر في ناس.</p>
           <h2>تأثيرك على الأطفال والشباب</h2>
           <p>الأطفال في مرحلة البناء، وأنت قدوة عندهم. والشباب يبحثون عن الهوية، وكلمة منك ممكن أن تشجع شاباً يستمر، أو تحطمه.</p>
           <div class="quote">المحتوى الذي تقدمه اليوم، هو المجتمع الذي ستعيش فيه غداً. فاختر بعناية ما تقدم.<span class="quote-author">- جنكيز</span></div>
         </div>
-        <div class="page-number">25</div>
+        <div class="page-number">٧</div>
       </div>
 
       <div class="page" data-page="8">
-        <div class="chapter-header"><div class="chapter-number">الفصل 8</div><h2 class="chapter-title">صفات صانع المحتوى المحترم</h2></div>
+        <div class="chapter-header"><div class="chapter-number">الفصل ٨</div><h2 class="chapter-title">صفات صانع المحتوى المحترم</h2></div>
         <div class="content">
           <h2>الصدق والأمانة</h2>
           <p>كن صادقاً مع جمهورك. لا تكذب، ولا تمثل شخصية مزيفة.</p>
@@ -828,11 +848,11 @@ body {
           <p>التواضع قوة. اعترف بأخطائك، واشكر جمهورك. كل واحد عنده أخطاء، فبدل أن تنفعال من كل نقد، خذ النقد البناء وتعلم منه.</p>
           <div class="quote">التواضع لا ينقص من قدر الإنسان، بل يرفعه في أعين الناس.<span class="quote-author">- حكمة</span></div>
         </div>
-        <div class="page-number">29</div>
+        <div class="page-number">٨</div>
       </div>
 
       <div class="page" data-page="9">
-        <div class="chapter-header"><div class="chapter-number">الفصل 9</div><h2 class="chapter-title">رسالة إلى كل من يريد دخول هذا المجال</h2></div>
+        <div class="chapter-header"><div class="chapter-number">الفصل ٩</div><h2 class="chapter-title">رسالة إلى كل من يريد دخول هذا المجال</h2></div>
         <div class="content">
           <p>الشهرة ليست الهدف، الشهرة نتيجة. لو دخلت المجال من أجل الشهرة فقط، ستخسر كثيراً. لو دخلت المجال من أجل الرسالة، ستكسب الأثر.</p>
           <h2>القيمة هي التي تبقى</h2>
@@ -841,7 +861,7 @@ body {
           <h2>لا تبع مبادئك</h2>
           <p>الفلوس تجيء وتذهب. لكن المبادئ لو بعتها، لن تقدر تشتريها مرة ثانية.</p>
         </div>
-        <div class="page-number">33</div>
+        <div class="page-number">٩</div>
       </div>
 
       <div class="page" data-page="10">
@@ -854,7 +874,7 @@ body {
           <p>فاختر. اختر أن تكون من البنائين. اختر أن تحمل رسالة. اختر أن تترك أثراً طيباً.</p>
           <p style="text-align: center; font-family: 'Cairo', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent-brown); margin-top: 60px;">انتهى الكتاب<br><span style="font-size: 16px; color: var(--text-secondary); font-weight: 500;">تأليف: جنكيز</span></p>
         </div>
-        <div class="page-number">37</div>
+        <div class="page-number">١٠</div>
       </div>
 
       <div class="click-zone prev" onclick="goToPage(currentPage - 1)"></div>
@@ -865,7 +885,7 @@ body {
 
 <script>
 let currentPage = 0;
-const totalPages = 11;
+const totalPages = 11; // 0-index + 10 صفحات محتوى
 
 const bookCover = document.getElementById('bookCover');
 const coverFrame = document.getElementById('coverFrame');
