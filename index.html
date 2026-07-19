@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="كتاب صناعة المحتوى: مسؤولية وليست شهرة - تأليف جنكيز">
+<meta name="author" content="جنكيز">
+<meta name="theme-color" content="#6B5344">
+<title>صناعة المحتوى: مسؤولية وليست شهرة | جنكيز</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper-color: #faf8f5;
+  --paper-dark: #f0ece3;
+  --text-primary: #2c2419;
+  --text-secondary: #5a4d3a;
+  --accent-gold: #c9a961;
+  --accent-brown: #8b6f3f;
+  --border-color: #d4c9b8;
+  --shadow-color: rgba(44, 36, 25, 0.15);
+  --board-light: #8B7355;
+  --board-main: #6B5344;
+  --board-dark: #4A3728;
+  --board-darkest: #2d1f15;
+  --transition: 0.3s ease;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Tajawal', 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+  background: linear-gradient(135deg, #e8e4d9 0%, #d4c9b8 100%);
+  color: var(--text-primary);
+  line-height: 2;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.book-cover {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2d1f15 0%, #1a1108 100%);
+  position: relative;
+  padding: 20px;
+  perspective: 1500px;
+}
+
+.book-outer-frame {
+  position: relative;
+  padding: 15px;
+  background: linear-gradient(135deg, #1a1108 0%, #0d0906 100%);
+  border-radius: 12px;
+  box-shadow: 
+    0 30px 80px rgba(0,0,0,0.6),
+    0 15px 40px rgba(0,0,0,0.4),
+    inset 0 0 0 2px rgba(201, 169, 97, 0.4),
+    inset 0 0 0 4px rgba(107, 83, 68, 0.6);
+  width: 100%;
+  max-width: 550px;
+}
+
+.book-outer-frame::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.cover-frame {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(135deg, #6B5344 0%, #4A3728 50%, #2d1f15 100%);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.3);
+  min-height: 800px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgba(201, 169, 97, 0.5);
+  transform: rotateY(-2deg);
+  transition: transform 0.5s ease;
+}
+
+.cover-frame:hover { transform: rotateY(0deg); }
+
+.cover-frame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 35%; height: 100%;
+  background: 
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px),
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 40%);
+  border-right: 3px solid rgba(255,255,255,0.3);
+  z-index: 1;
+  backdrop-filter: blur(5px);
+}
+
+.cover-frame::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 65%; height: 100%;
+  background: linear-gradient(135deg, rgba(107, 83, 68, 0.9) 0%, rgba(74, 55, 40, 0.95) 50%, rgba(45, 31, 21, 0.98) 100%);
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+  z-index: 0;
+}
+
+.menu-btn {
+  position: absolute;
+  top: 20px; right: 25px;
+  width: 48px; height: 48px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid var(--board-main);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  z-index: 100;
+  transition: all var(--transition);
+  padding: 0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.menu-btn:hover {
+  background: var(--board-main);
+  transform: scale(1.05);
+}
+
+.menu-btn span {
+  display: block;
+  width: 24px; height: 3px;
+  background: var(--board-main);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
+
+.menu-btn:hover span { background: #fff; }
+
+.cover-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 40px 40px;
+  flex: 1;
+}
+
+.author-photo-container {
+  position: relative;
+  width: 180px; height: 180px;
+  margin-bottom: 20px;
+  perspective: 1000px;
+  align-self: flex-start;
+  margin-right: 30px;
+}
+
+.author-photo {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 0 3px var(--accent-gold);
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-8deg) rotateY(10deg);
+  transition: transform 0.5s ease;
+}
+
+.author-photo:hover { transform: rotate(-5deg) rotateY(5deg) scale(1.05); }
+
+.author-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.author-photo-placeholder { font-size: 70px; color: var(--accent-gold); font-weight: 700; }
+
+.author-photo-shadow {
+  position: absolute;
+  bottom: -15px; left: 10%;
+  width: 80%; height: 20px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  filter: blur(10px);
+}
+
+.cover-thanks {
+  width: 100%;
+  padding: 18px 22px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 3px solid var(--board-main);
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  margin-bottom: 25px;
+}
+
+.cover-thanks-text {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 15px;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.tiktok-logo-small {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.cover-thanks-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 900;
+  font-size: 18px;
+  transition: all var(--transition);
+  padding: 12px 25px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--board-main), var(--board-dark));
+  border: 2px solid var(--accent-gold);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  position: relative;
+}
+
+.cover-thanks-link:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+.follow-badge {
+  position: absolute;
+  top: -8px; right: -8px;
+  background: #fe2c55;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 4px 10px;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(254, 44, 85, 0.6);
+}
+
+/* ========== تحسين وضوح العنوان ========== */
+.cover-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.4;
+  margin: 15px 0;
+  /* ظلال متعددة لوضوح أكبر */
+  text-shadow: 
+    0 0 10px rgba(0,0,0,0.9),
+    0 0 20px rgba(0,0,0,0.8),
+    0 0 30px rgba(0,0,0,0.7),
+    0 0 40px rgba(0,0,0,0.6),
+    3px 3px 6px rgba(0,0,0,1),
+    -2px -2px 4px rgba(0,0,0,0.8),
+    2px -2px 4px rgba(0,0,0,0.8),
+    -2px 2px 4px rgba(0,0,0,0.8);
+  /* حدود خارجية للنص */
+  -webkit-text-stroke: 1px rgba(0,0,0,0.6);
+  text-stroke: 1px rgba(0,0,0,0.6);
+  /* خلفية شبه شفافة خلف النص */
+  display: inline-block;
+  padding: 10px 20px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+}
+
+.cover-subtitle {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 22px;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 900;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 12px 35px;
+  border-radius: 30px;
+  margin: 15px 0 25px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  /* ظلال للنص */
+  text-shadow: 
+    0 0 10px rgba(0,0,0,0.9),
+    0 0 20px rgba(0,0,0,0.8),
+    2px 2px 4px rgba(0,0,0,1),
+    -1px -1px 2px rgba(0,0,0,0.9);
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.7);
+  text-stroke: 0.5px rgba(0,0,0,0.7);
+  box-shadow: 
+    0 5px 20px rgba(0,0,0,0.5),
+    inset 0 0 10px rgba(255,255,255,0.1);
+}
+
+.signature-stamp {
+  width: 220px;
+  height: 100px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature-svg { width: 100%; height: 80px; }
+
+.signature-line {
+  stroke: var(--accent-gold);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: drawSignature 3s ease-in-out forwards;
+}
+
+@keyframes drawSignature { to { stroke-dashoffset: 0; } }
+
+.signature-name {
+  font-family: 'Amiri', serif;
+  font-size: 18px;
+  color: var(--accent-gold);
+  margin-top: -10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.cover-author-block { text-align: center; margin-top: 10px; }
+
+.cover-label { 
+  font-size: 14px; 
+  color: #ffffff;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  font-weight: 900;
+  text-shadow: 
+    0 0 10px rgba(0,0,0,0.9),
+    2px 2px 4px rgba(0,0,0,1);
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.8);
+  text-stroke: 0.5px rgba(0,0,0,0.8);
+}
+
+.cover-author { 
+  font-family: 'Cairo', sans-serif; 
+  font-size: 32px; 
+  color: #ffffff;
+  font-weight: 900;
+  text-shadow: 
+    0 0 10px rgba(0,0,0,0.9),
+    0 0 20px rgba(0,0,0,0.8),
+    3px 3px 6px rgba(0,0,0,1),
+    -2px -2px 4px rgba(0,0,0,0.8);
+  letter-spacing: 1px;
+  -webkit-text-stroke: 1px rgba(0,0,0,0.7);
+  text-stroke: 1px rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.3);
+  padding: 8px 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.cover-year { 
+  font-size: 18px; 
+  color: #ffffff;
+  margin-top: 8px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-shadow: 
+    0 0 10px rgba(0,0,0,0.9),
+    2px 2px 4px rgba(0,0,0,1);
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.8);
+  text-stroke: 0.5px rgba(0,0,0,0.8);
+}
+
+.cover-hint {
+  position: absolute;
+  bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 20;
+  background: rgba(0,0,0,0.7);
+  padding: 8px 20px;
+  border-radius: 20px;
+  white-space: nowrap;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+}
+
+.toc-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.toc-modal.open { display: flex; }
+
+.toc-modal-content {
+  background: var(--paper-color);
+  border-radius: 12px;
+  padding: 30px 25px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  border: 2px solid var(--board-main);
+}
+
+.toc-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.toc-modal-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--accent-brown);
+}
+
+.toc-close-btn {
+  width: 36px; height: 36px;
+  background: var(--paper-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+.toc-modal-list { list-style: none; }
+
+.toc-modal-item {
+  padding: 14px 18px;
+  margin: 8px 0;
+  background: rgba(107, 83, 68, 0.05);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toc-modal-item:hover {
+  background: rgba(107, 83, 68, 0.15);
+  transform: translateX(-5px);
+}
+
+.toc-modal-item-number { font-weight: 700; color: var(--accent-gold); margin-left: 12px; min-width: 28px; }
+.toc-modal-item-title { flex: 1; font-size: 16px; color: var(--text-primary); }
+.toc-modal-item-page { color: var(--text-secondary); font-size: 13px; }
+
+.book-reader { display: none; min-height: 100vh; padding: 20px; }
+.book-reader.active { display: block; }
+
+.book-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--paper-color);
+  border-radius: 4px;
+  box-shadow: 0 10px 40px var(--shadow-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-bar {
+  background: var(--paper-dark);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.nav-title { font-family: 'Cairo', sans-serif; font-size: 15px; color: var(--accent-brown); font-weight: 700; }
+.nav-controls { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.nav-btn {
+  padding: 8px 14px;
+  background: var(--paper-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.nav-btn:hover { background: var(--board-main); color: #fff; border-color: var(--board-main); }
+.nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.nav-btn.cover-btn { background: var(--board-dark); color: #fff; border-color: var(--board-dark); }
+
+.pages-area { position: relative; min-height: 700px; }
+
+.page { display: none; padding: 50px 60px; }
+.page.active { display: block; }
+
+.chapter-header { text-align: center; margin-bottom: 40px; }
+.chapter-number { font-size: 15px; color: var(--accent-gold); margin-bottom: 12px; font-weight: 700; }
+.chapter-title { font-family: 'Cairo', sans-serif; font-size: 26px; font-weight: 900; color: var(--accent-brown); margin-bottom: 12px; }
+.chapter-subtitle { font-size: 16px; color: var(--text-secondary); font-weight: 500; }
+
+.content { font-size: 17px; line-height: 2.2; text-align: right; }
+.content p { margin-bottom: 20px; text-align: justify; }
+.content h2 { font-family: 'Cairo', sans-serif; font-size: 21px; font-weight: 700; color: var(--accent-brown); margin: 30px 0 14px; }
+.content ul { margin: 18px 0; padding-right: 25px; }
+.content li { margin-bottom: 10px; line-height: 2; }
+
+.quote {
+  margin: 30px 25px;
+  padding: 20px 25px;
+  background: rgba(107, 83, 68, 0.08);
+  border-right: 4px solid var(--board-main);
+  border-radius: 8px;
+  font-size: 18px;
+  line-height: 2.2;
+  color: var(--text-secondary);
+}
+
+.quote-author { display: block; margin-top: 12px; font-size: 14px; color: var(--accent-brown); font-weight: 700; text-align: left; }
+
+.highlight-box {
+  background: rgba(107, 83, 68, 0.08);
+  border: 1px solid rgba(107, 83, 68, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 25px 0;
+}
+
+.highlight-box-title { font-family: 'Cairo', sans-serif; font-size: 16px; color: var(--accent-brown); font-weight: 700; margin-bottom: 12px; }
+
+.page-number { text-align: center; margin-top: 35px; font-size: 13px; color: var(--text-secondary); }
+
+.click-zone { position: absolute; top: 0; bottom: 0; width: 70px; z-index: 50; cursor: pointer; }
+.click-zone.prev { right: 0; }
+.click-zone.next { left: 0; }
+
+@media (max-width: 768px) {
+  .book-outer-frame { padding: 10px; }
+  .cover-frame { min-height: 700px; transform: none; }
+  .cover-content { padding: 60px 25px 35px; }
+  .author-photo-container { width: 140px; height: 140px; align-self: center; margin-right: 0; }
+  .cover-title { font-size: 30px; padding: 8px 15px; }
+  .cover-subtitle { font-size: 18px; }
+  .cover-author { font-size: 26px; }
+  .page { padding: 35px 25px; }
+  .content { font-size: 16px; }
+  .chapter-title { font-size: 22px; }
+  .quote { margin: 25px 15px; padding: 18px 20px; font-size: 16px; }
+  .nav-btn { padding: 6px 10px; font-size: 12px; }
+  .click-zone { width: 50px; }
+}
+
+@media (max-width: 480px) {
+  .book-cover { padding: 10px; }
+  .book-outer-frame { padding: 8px; }
+  .cover-frame { min-height: 650px; }
+  .cover-content { padding: 55px 18px 30px; }
+  .author-photo-container { width: 120px; height: 120px; }
+  .cover-title { font-size: 26px; padding: 6px 12px; }
+  .cover-subtitle { font-size: 16px; }
+  .cover-author { font-size: 22px; }
+  .page { padding: 30px 18px; }
+  .content { font-size: 15px; line-height: 2; }
+  .chapter-title { font-size: 20px; }
+  .content h2 { font-size: 18px; }
+  .quote { margin: 20px 12px; padding: 16px 18px; font-size: 15px; }
+  .nav-btn { padding: 5px 8px; font-size: 11px; }
+}
+
+@media (max-width: 360px) {
+  .cover-frame { min-height: 600px; }
+  .cover-title { font-size: 24px; }
+  .author-photo-container { width: 100px; height: 100px; }
+  .content { font-size: 14px; }
+}
+
+@media (min-width: 1200px) {
+  .cover-frame { max-width: 550px; min-height: 850px; }
+  .cover-title { font-size: 48px; }
+  .cover-author { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<div class="book-cover" id="bookCover">
+  <div class="book-outer-frame">
+    <div class="cover-frame" id="coverFrame">
+      <button class="menu-btn" id="menuBtn" aria-label="فتح الفهرس">
+        <span></span><span></span><span></span>
+      </button>
+      
+      <div class="cover-content">
+        <div class="author-photo-container">
+          <div class="author-photo">
+            <img src="author.png" alt="المؤلف جنكيز" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="author-photo-placeholder" style="display: none;">ج</div>
+          </div>
+          <div class="author-photo-shadow"></div>
+        </div>
+        
+        <div class="cover-thanks">
+          <p class="cover-thanks-text">رسالة شكر خاصة بالمناسبة للأخ الفاضل الخلوق</p>
+          <a href="https://www.tiktok.com/@doctor.ff4?_r=1&_t=ZS-98APA79LGeT" target="_blank" rel="noopener noreferrer" class="cover-thanks-link" onclick="event.stopPropagation();">
+            <span class="follow-badge">تابع الآن</span>
+            <img src="tiktok-logo.png" alt="TikTok" class="tiktok-logo-small" loading="lazy" onerror="this.style.display='none'">
+            <span>@doctor.ff4</span>
+          </a>
+        </div>
+        
+        <h1 class="cover-title">صناعة المحتوى<br>مسؤولية وليست شهرة</h1>
+        <p class="cover-subtitle">رحلة في عالم التأثير الحقيقي</p>
+        
+        <div class="signature-stamp">
+          <svg class="signature-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+            <path class="signature-line" d="M 10 50 Q 20 30, 35 35 T 60 40 Q 70 45, 80 35 T 100 40 Q 110 50, 120 40 T 140 35 Q 150 30, 160 40 T 180 45 Q 190 50, 195 40" />
+            <path class="signature-line" d="M 30 55 Q 50 60, 70 55 T 110 50 Q 130 45, 150 50 T 185 55" style="animation-delay: 0.5s;" />
+          </svg>
+          <div class="signature-name">جنكيز</div>
+        </div>
+        
+        <div class="cover-author-block">
+          <p class="cover-label">تأليف</p>
+          <p class="cover-author">جنكيز</p>
+          <p class="cover-year">2026</p>
+        </div>
+      </div>
+
+      <p class="cover-hint">اضغط في أي مكان لبدء القراءة</p>
+    </div>
+  </div>
+</div>
+
+<div class="toc-modal" id="tocModal">
+  <div class="toc-modal-content">
+    <div class="toc-modal-header">
+      <h2 class="toc-modal-title">فهرس الكتاب</h2>
+      <button class="toc-close-btn" id="tocCloseBtn"></button>
+    </div>
+    <ul class="toc-modal-list">
+      <li class="toc-modal-item" onclick="selectChapter(1)"><span class="toc-modal-item-number"></span><span class="toc-modal-item-title">المقدمة</span><span class="toc-modal-item-page">3</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(2)"><span class="toc-modal-item-number">2</span><span class="toc-modal-item-title">من هو صانع المحتوى الحقيقي؟</span><span class="toc-modal-item-page">5</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(3)"><span class="toc-modal-item-number">3</span><span class="toc-modal-item-title">الستريمر المحترف</span><span class="toc-modal-item-page">9</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(4)"><span class="toc-modal-item-number">4</span><span class="toc-modal-item-title">أخلاقيات صناعة المحتوى</span><span class="toc-modal-item-page">13</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(5)"><span class="toc-modal-item-number">5</span><span class="toc-modal-item-title">لماذا يفشل الكثير من صناع المحتوى؟</span><span class="toc-modal-item-page">17</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(6)"><span class="toc-modal-item-number">6</span><span class="toc-modal-item-title">طريق النجاح</span><span class="toc-modal-item-page">21</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(7)"><span class="toc-modal-item-number">7</span><span class="toc-modal-item-title">التأثير في المجتمع</span><span class="toc-modal-item-page">25</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(8)"><span class="toc-modal-item-number">8</span><span class="toc-modal-item-title">صفات صانع المحتوى المحترم</span><span class="toc-modal-item-page">29</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(9)"><span class="toc-modal-item-number">9</span><span class="toc-modal-item-title">رسالة إلى كل من يريد دخول هذا المجال</span><span class="toc-modal-item-page">33</span></li>
+      <li class="toc-modal-item" onclick="selectChapter(10)"><span class="toc-modal-item-number">10</span><span class="toc-modal-item-title">الخاتمة</span><span class="toc-modal-item-page">37</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="book-reader" id="bookReader">
+  <div class="book-container">
+    <div class="nav-bar">
+      <div class="nav-title">صناعة المحتوى: مسؤولية وليست شهرة</div>
+      <div class="nav-controls">
+        <button class="nav-btn" id="readerMenuBtn">الفهرس</button>
+        <button class="nav-btn cover-btn" onclick="goToCover()">الغلاف</button>
+        <button class="nav-btn" onclick="goToPage(currentPage - 1)" id="prevBtn">السابق</button>
+        <button class="nav-btn" onclick="goToPage(currentPage + 1)" id="nextBtn">التالي</button>
+      </div>
+    </div>
+    
+    <div class="pages-area">
+      <div class="page toc-page active" data-page="0">
+        <div class="chapter-header"><h2 class="chapter-title" style="font-size: 32px;">فهرس الكتاب</h2></div>
+        <ul class="toc-modal-list">
+          <li class="toc-modal-item" onclick="goToPage(1)"><span class="toc-modal-item-number">1</span><span class="toc-modal-item-title">المقدمة</span><span class="toc-modal-item-page">3</span></li>
+          <li class="toc-modal-item" onclick="goToPage(2)"><span class="toc-modal-item-number">2</span><span class="toc-modal-item-title">من هو صانع المحتوى الحقيقي؟</span><span class="toc-modal-item-page">5</span></li>
+          <li class="toc-modal-item" onclick="goToPage(3)"><span class="toc-modal-item-number">3</span><span class="toc-modal-item-title">الستريمر المحترف</span><span class="toc-modal-item-page">9</span></li>
+          <li class="toc-modal-item" onclick="goToPage(4)"><span class="toc-modal-item-number">4</span><span class="toc-modal-item-title">أخلاقيات صناعة المحتوى</span><span class="toc-modal-item-page">13</span></li>
+          <li class="toc-modal-item" onclick="goToPage(5)"><span class="toc-modal-item-number">5</span><span class="toc-modal-item-title">لماذا يفشل الكثير من صناع المحتوى؟</span><span class="toc-modal-item-page">17</span></li>
+          <li class="toc-modal-item" onclick="goToPage(6)"><span class="toc-modal-item-number">6</span><span class="toc-modal-item-title">طريق النجاح</span><span class="toc-modal-item-page">21</span></li>
+          <li class="toc-modal-item" onclick="goToPage(7)"><span class="toc-modal-item-number">7</span><span class="toc-modal-item-title">التأثير في المجتمع</span><span class="toc-modal-item-page">25</span></li>
+          <li class="toc-modal-item" onclick="goToPage(8)"><span class="toc-modal-item-number">8</span><span class="toc-modal-item-title">صفات صانع المحتوى المحترم</span><span class="toc-modal-item-page">29</span></li>
+          <li class="toc-modal-item" onclick="goToPage(9)"><span class="toc-modal-item-number">9</span><span class="toc-modal-item-title">رسالة إلى كل من يريد دخول هذا المجال</span><span class="toc-modal-item-page">33</span></li>
+          <li class="toc-modal-item" onclick="goToPage(10)"><span class="toc-modal-item-number">10</span><span class="toc-modal-item-title">الخاتمة</span><span class="toc-modal-item-page">37</span></li>
+        </ul>
+      </div>
+
+      <div class="page" data-page="1">
+        <div class="chapter-header"><div class="chapter-number">الفصل 1</div><h2 class="chapter-title">المقدمة</h2></div>
+        <div class="content">
+          <p>أخي القارئ، أختي القارئة، أكتب لك هذه الكلمات من واقع خبرة واسعة في العالم الرقمي والتقني، ومتابعة دقيقة لعالم صناعة المحتوى عن قرب. عالم تغيرت فيه المفاهيم، وانقلبت فيه الموازين، وأصبح فيه كل من يملك هاتفاً ذكياً يظن نفسه صانع محتوى.</p>
+          <p>لكن دعني أسألك سؤالاً صادقاً: هل كل من يمسك الكاميرا صار صانع محتوى؟ هل كل من ينشر فيديو صار مؤثراً؟ هل الشهرة وحدها تكفي ليقال عنك إنك ناجح؟</p>
+          <div class="quote">الشهرة قد تأتي بالصدفة، لكن التأثير الحقيقي لا يأتي إلا بالمسؤولية والوعي والرسالة الصادقة.<span class="quote-author">- من مقدمة الكتاب</span></div>
+          <p>صناعة المحتوى اليوم لم تعد مجرد هواية أو وسيلة للترفيه، بل أصبحت قوة مؤثرة تُشكّل وعي الأجيال، وتُبنى بها الثقافات، وتُصاغ بها السلوكيات.</p>
+          <p>هذا الكتاب ليس نقداً لأحد، ولا هجوماً على فئة بعينها، بل هو دعوة صادقة إلى التأمل، ومراجعة للذات، وتذكير بالمسؤولية العظيمة التي يحملها كل من اختار أن يكون صانع محتوى.</p>
+          <p>تعال معي في هذه الرحلة، فلعلها تكون نوراً لك كما كانت لي.</p>
+        </div>
+        <div class="page-number">3</div>
+      </div>
+
+      <div class="page" data-page="2">
+        <div class="chapter-header"><div class="chapter-number">الفصل 2</div><h2 class="chapter-title">من هو صانع المحتوى الحقيقي؟</h2></div>
+        <div class="content">
+          <p>كثيرون اليوم يطلقون على أنفسهم لقب "صانع محتوى" لمجرد أنهم ينشرون فيديوهات أو صوراً على منصات التواصل، ولكن الحقيقة أن صناعة المحتوى أعمق من ذلك بكثير.</p>
+          <h2>مفهوم صناعة المحتوى</h2>
+          <p>صناعة المحتوى هي عملية إبداعية هادفة تهدف إلى تقديم قيمة حقيقية للجمهور. وهي تختلف جوهرياً عن مجرد النشر، فالنشر قد يكون عشوائياً بلا هدف، بينما الصناعة تعني البناء والتخطيط والإتقان.</p>
+          <h2>الفرق بين الناشر وصانع المحتوى</h2>
+          <p>الناشر قد ينشر أي شيء، في أي وقت، دون تخطيط أو هدف. أما صانع المحتوى فهو من يخطط لما سيقدمه، ويدرس جمهوره، ويختار رسائله بعناية.</p>
+          <div class="highlight-box"><div class="highlight-box-title">نقطة مهمة</div><p>امتلاك كاميرا احترافية، أو عدد كبير من المتابعين، لا يجعل منك صانع محتوى حقيقي. فالأدوات وسائل، والرسالة هي الغاية.</p></div>
+        </div>
+        <div class="page-number">5</div>
+      </div>
+
+      <div class="page" data-page="3">
+        <div class="chapter-header"><div class="chapter-number">الفصل 3</div><h2 class="chapter-title">الستريمر المحترف</h2></div>
+        <div class="content">
+          <p>البث المباشر أصبح من أكثر أشكال صناعة المحتوى انتشاراً. وهو شكل فريد من التفاعل الحي مع الجمهور، يتطلب مهارات خاصة، وانضباطاً عالياً، ووعياً كبيراً بالمسؤولية.</p>
+          <h2>كيف يكون الستريمر محترفاً؟</h2>
+          <ul>
+            <li><strong>التخطيط المسبق:</strong> لا يدخل البث عشوائياً، بل يُعدّ لمحتواه.</li>
+            <li><strong>الانضباط اللغوي:</strong> يحافظ على لغته، ويتجنب الألفاظ البذيئة.</li>
+            <li><strong>الوعي بالجمهور:</strong> يدرك أن بين مشاهديه أطفالاً ومراهقين.</li>
+            <li><strong>ضبط النفس:</strong> لا ينفعال بسرعة، ولا يُنجَر إلى استفزازات.</li>
+          </ul>
+          <div class="quote">الستريمر الحقيقي ليس من يُسكت منتقديه بالصراخ، بل من يكسب احترامهم بالحكمة.<span class="quote-author">- جنكيز</span></div>
+        </div>
+        <div class="page-number">9</div>
+      </div>
+
+      <div class="page" data-page="4">
+        <div class="chapter-header"><div class="chapter-number">الفصل 4</div><h2 class="chapter-title">أخلاقيات صناعة المحتوى</h2></div>
+        <div class="content">
+          <p>الأخلاق هي الأساس. وبدون أخلاق، كل شيء آخر لا قيمة له.</p>
+          <h2>احترام المشاهد والأطفال</h2>
+          <p>الجمهور ليس أرقاماً، بل بشر. والأطفال هم أضعف فئة وأكثرها تأثراً. هم يرونك قدوة، ويسمعون كلامك، ويقلدونك.</p>
+          <div class="quote">كل كلمة تقولها أمام الكاميرا، ممكن أن تصير كلمة يقولها طفل في المدرسة. فكر قبل أن تتكلم.<span class="quote-author">- جنكيز</span></div>
+          <h2>عدم نشر الكراهية</h2>
+          <p>الكراهية تجلب مشاهدات سريعة، لكنها تترك أثراً سيئاً. ففكر قبل أن تتكلم: هل هذا الكلام يبني أم يهدم؟</p>
+        </div>
+        <div class="page-number">13</div>
+      </div>
+
+      <div class="page" data-page="5">
+        <div class="chapter-header"><div class="chapter-number">الفصل 5</div><h2 class="chapter-title">لماذا يفشل الكثير من صناع المحتوى؟</h2></div>
+        <div class="content">
+          <h2>التكرار وغياب الإبداع</h2>
+          <p>الجمهور ذكي ويبحث عن الجديد. لو أنت تقدم نفس الشيء كل مرة، الناس ستذهب. الإبداع ليس رفاهية، بل ضرورة.</p>
+          <h2>البحث عن المشاهدات فقط</h2>
+          <p>الشهرة المبنية على التفاهة لا تدوم. والناس التي جاءت من أجل الإثارة الرخيصة، ستذهب عندما تجد إثارة أرخص عند غيرك.</p>
+          <div class="quote">لو بنيت شهرتك على التفاهة، ستجيء يوم تجد شخصاً عنده تفاهة أرخص منك، ويأخذ مكانك.<span class="quote-author">- جنكيز</span></div>
+          <h2>فقدان احترام الجمهور</h2>
+          <p>الجمهور ممكن أن يسامحك على غلطة، لكن لا يسامحك على فقدان الاحترام. الأرقام لا تساوي شيئاً بدون احترام.</p>
+        </div>
+        <div class="page-number">17</div>
+      </div>
+
+      <div class="page" data-page="6">
+        <div class="chapter-header"><div class="chapter-number">الفصل 6</div><h2 class="chapter-title">طريق النجاح</h2></div>
+        <div class="content">
+          <h2>طور نفسك واقرأ</h2>
+          <p>صانع المحتوى هو وعاء. لو كان فارغاً، لا يوجد شيء يقدمه. القراءة توسع عقلك وتعطيك أفكاراً جديدة.</p>
+          <h2>الاستمرارية والانضباط</h2>
+          <p>النجاح الحقيقي لا يأتي من فيديو واحد، بل من عمل مستمر، والتزام، وانضباط.</p>
+          <div class="highlight-box"><div class="highlight-box-title">المعادلة</div><p>النجاح في صناعة المحتوى = قيمة + استمرارية + أخلاق. لو جمعت الثلاثة، ستنجح.</p></div>
+        </div>
+        <div class="page-number">21</div>
+      </div>
+
+      <div class="page" data-page="7">
+        <div class="chapter-header"><div class="chapter-number">الفصل 7</div><h2 class="chapter-title">التأثير في المجتمع</h2></div>
+        <div class="content">
+          <p>كل فيديو تعمل، كل بث تقدم، كل كلمة تقول، تؤثر في ناس.</p>
+          <h2>تأثيرك على الأطفال والشباب</h2>
+          <p>الأطفال في مرحلة البناء، وأنت قدوة عندهم. والشباب يبحثون عن الهوية، وكلمة منك ممكن أن تشجع شاباً يستمر، أو تحطمه.</p>
+          <div class="quote">المحتوى الذي تقدمه اليوم، هو المجتمع الذي ستعيش فيه غداً. فاختر بعناية ما تقدم.<span class="quote-author">- جنكيز</span></div>
+        </div>
+        <div class="page-number">25</div>
+      </div>
+
+      <div class="page" data-page="8">
+        <div class="chapter-header"><div class="chapter-number">الفصل 8</div><h2 class="chapter-title">صفات صانع المحتوى المحترم</h2></div>
+        <div class="content">
+          <h2>الصدق والأمانة</h2>
+          <p>كن صادقاً مع جمهورك. لا تكذب، ولا تمثل شخصية مزيفة.</p>
+          <h2>التواضع وتقبل النقد</h2>
+          <p>التواضع قوة. اعترف بأخطائك، واشكر جمهورك. كل واحد عنده أخطاء، فبدل أن تنفعال من كل نقد، خذ النقد البناء وتعلم منه.</p>
+          <div class="quote">التواضع لا ينقص من قدر الإنسان، بل يرفعه في أعين الناس.<span class="quote-author">- حكمة</span></div>
+        </div>
+        <div class="page-number">29</div>
+      </div>
+
+      <div class="page" data-page="9">
+        <div class="chapter-header"><div class="chapter-number">الفصل 9</div><h2 class="chapter-title">رسالة إلى كل من يريد دخول هذا المجال</h2></div>
+        <div class="content">
+          <p>الشهرة ليست الهدف، الشهرة نتيجة. لو دخلت المجال من أجل الشهرة فقط، ستخسر كثيراً. لو دخلت المجال من أجل الرسالة، ستكسب الأثر.</p>
+          <h2>القيمة هي التي تبقى</h2>
+          <p>الشهرة تذهب، والأرقام تتغير. لكن القيمة التي قدمتها، والأثر الذي تركته في قلوب الناس، هذا يبقى.</p>
+          <div class="quote">الناس لن تتذكرك من عدد فيديوهاتك. الناس ستتذكرك من أثر كلماتك في قلوبهم.<span class="quote-author">- جنكيز</span></div>
+          <h2>لا تبع مبادئك</h2>
+          <p>الفلوس تجيء وتذهب. لكن المبادئ لو بعتها، لن تقدر تشتريها مرة ثانية.</p>
+        </div>
+        <div class="page-number">33</div>
+      </div>
+
+      <div class="page" data-page="10">
+        <div class="chapter-header"><div class="chapter-number">الخاتمة</div><h2 class="chapter-title">في النهاية، تبقى الرسالة</h2></div>
+        <div class="content">
+          <p>صناعة المحتوى مسؤولية قبل أن تكون شهرة. رسالة قبل أن تكون وسيلة للربح.</p>
+          <p>صانع المحتوى الحقيقي هو الذي عنده رسالة، وقيمة، وأخلاق.</p>
+          <div class="quote">ليس كل مشهور مؤثر. وليس كل مؤثر مشهور. الشهرة ممكن أن تجيء بالصدفة. لكن التأثير لا يجيء إلا بالرسالة والأخلاق والقيمة.<span class="quote-author">- جنكيز</span></div>
+          <p>يا قارئ هذا الكتاب، اعرف أنك حامل أمانة كبيرة. كل كلمة تقولها، كل صورة تنشرها، كل بث تقدمه، له أثر.</p>
+          <p>فاختر. اختر أن تكون من البنائين. اختر أن تحمل رسالة. اختر أن تترك أثراً طيباً.</p>
+          <p style="text-align: center; font-family: 'Cairo', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent-brown); margin-top: 60px;">انتهى الكتاب<br><span style="font-size: 16px; color: var(--text-secondary); font-weight: 500;">تأليف: جنكيز</span></p>
+        </div>
+        <div class="page-number">37</div>
+      </div>
+
+      <div class="click-zone prev" onclick="goToPage(currentPage - 1)"></div>
+      <div class="click-zone next" onclick="goToPage(currentPage + 1)"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentPage = 0;
+const totalPages = 11;
+
+const bookCover = document.getElementById('bookCover');
+const coverFrame = document.getElementById('coverFrame');
+const bookReader = document.getElementById('bookReader');
+const tocModal = document.getElementById('tocModal');
+const menuBtn = document.getElementById('menuBtn');
+const readerMenuBtn = document.getElementById('readerMenuBtn');
+const tocCloseBtn = document.getElementById('tocCloseBtn');
+
+function openToc() { tocModal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeToc() { tocModal.classList.remove('open'); document.body.style.overflow = ''; }
+
+menuBtn.addEventListener('click', function(e) { e.stopPropagation(); openToc(); });
+readerMenuBtn.addEventListener('click', function(e) { e.stopPropagation(); openToc(); });
+tocCloseBtn.addEventListener('click', closeToc);
+tocModal.addEventListener('click', function(e) { if (e.target === tocModal) closeToc(); });
+
+function selectChapter(pageNum) {
+  closeToc();
+  bookCover.style.display = 'none';
+  bookReader.classList.add('active');
+  goToPage(pageNum);
+}
+
+function goToPage(pageNum) {
+  if (pageNum < 0 || pageNum >= totalPages) return;
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
+  if (pages[pageNum]) { pages[pageNum].classList.add('active'); currentPage = pageNum; }
+  updateButtons();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateButtons() {
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  if (prevBtn) prevBtn.disabled = currentPage === 0;
+  if (nextBtn) nextBtn.disabled = currentPage === totalPages - 1;
+}
+
+coverFrame.addEventListener('click', function(e) {
+  if (e.target.closest('.menu-btn') || e.target.closest('.cover-thanks-link')) return;
+  bookCover.style.display = 'none';
+  bookReader.classList.add('active');
+  goToPage(0);
+});
+
+function goToCover() {
+  bookReader.classList.remove('active');
+  bookCover.style.display = 'flex';
+  currentPage = 0;
+  updateButtons();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+updateButtons();
+</script>
+
+</body>
+</html>
